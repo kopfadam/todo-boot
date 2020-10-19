@@ -36,6 +36,10 @@ public class ToDo {
         this.description = description;
     }
 
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.DETACH, CascadeType.REFRESH})
+    @JoinColumn(name = "user_id")
+    private User user;
+
     @PrePersist
     void onCreate(){
         LocalDateTime date = LocalDateTime.now();
