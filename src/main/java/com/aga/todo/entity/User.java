@@ -30,6 +30,9 @@ public class User {
     private LocalDateTime created;
     private LocalDateTime modified;
 
+    public User() {
+    }
+
     public User(String name, String password, String email){
         this.name = name;
         this.password = password;

@@ -27,6 +27,9 @@ public class ToDo {
     private LocalDateTime modified;
     private boolean completed = false;
 
+    public ToDo() {
+    }
+
     public ToDo(String description){
         this.description = description;
     }
