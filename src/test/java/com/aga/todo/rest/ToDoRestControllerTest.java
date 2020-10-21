@@ -129,6 +129,16 @@ class ToDoRestControllerTest {
     }
 
     @Test
+    void shouldReturn404WhenGetToDoById() throws Exception{
+        final int id = 25;
+
+        given(toDoService.getToDoById(id)).willReturn(Optional.empty());
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/todos/{id}", id))
+                .andExpect(status().isNotFound());
+    }
+
+    @Test
     void getAllTodosByUser() {
     }
 
