@@ -121,7 +121,11 @@ class ToDoRestControllerTest {
 
     @Test
     void getAllToDos() throws Exception{
+        given(toDoService.getAllToDos()).willReturn(toDoList);
 
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/todos"))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.size()").value(toDoList.size()));
     }
 
     @Test
