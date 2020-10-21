@@ -108,7 +108,15 @@ class ToDoRestControllerTest {
 
     @Test
     void getToDoById() throws Exception {
+        final int id = 3;
+        final ToDo toDo = toDoList.get(2);
 
+        given(toDoService.getToDoById(id)).willReturn(Optional.of(toDo));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/api/todos/{id}", id))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("Buy ticket"))
+                .andExpect(jsonPath("$.completed").value(true));
     }
 
     @Test
