@@ -26,14 +26,14 @@ public class ToDoService {
         return toDo;
     }
 
-    public ToDo getToDoById(int toDoId){
+    public Optional<ToDo> getToDoById(int toDoId){
 
         Optional<ToDo> toDo = toDoRepository.findById(toDoId);
 
         if (!toDo.isPresent())
             throw new RuntimeException("Nothing found");
 
-        return toDo.get();
+        return toDo;
     }
 
     public List<ToDo> getAllToDos(){

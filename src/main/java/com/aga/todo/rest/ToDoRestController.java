@@ -5,8 +5,11 @@ import com.aga.todo.entity.User;
 import com.aga.todo.service.ToDoService;
 import com.aga.todo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -20,42 +23,52 @@ public class ToDoRestController {
     private ToDoService toDoService;
 
     @PostMapping("/todos")
-    public ToDo addToDo(@RequestBody ToDo toDo){
+    public ResponseEntity<ToDo> addToDo(@RequestBody ToDo toDo){
         User user = userService.getUserById(1);
+        ToDo toDo1 = toDoService.addToDo(toDo, user);
 
-        return toDoService.addToDo(toDo, user);
+        URI location = ServletUriComponentsBuilder.fromCurrentRequest().
+                path("/{id}")
+                .buildAndExpand(toDo1.getId()).toUri();
+
+        return ResponseEntity.created(location).build();
     }
 
     @GetMapping("/todos/{toDoId}")
-    public ToDo getToDoById(@PathVariable int toDoId){
+    public ResponseEntity<ToDo> getToDoById(@PathVariable int toDoId){
 
-        return toDoService.getToDoById(toDoId);
+        try {
+            return ResponseEntity.ok(toDoService.getToDoById(toDoId).get());
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+
     }
 
     @GetMapping("/todos")
-    public List<ToDo> getAllToDos(){
+    public ResponseEntity<List<ToDo>> getAllToDos(){
 
-        return toDoService.getAllToDos();
+        return ResponseEntity.ok(toDoService.getAllToDos());
     }
 
     @GetMapping("/todos/user/{userId}")
-    public List<ToDo> getAllTodosByUser(@PathVariable int userId){
+    public ResponseEntity<List<ToDo>> getAllTodosByUser(@PathVariable int userId){
 
         User user = userService.getUserById(userId);
 
-        return toDoService.getAllToDosByUser(user);
+        return ResponseEntity.ok(toDoService.getAllToDosByUser(user));
     }
 
     @DeleteMapping("/todos/{todoId}")
-    public String deleteTodo(@PathVariable int todoId) {
+    public ResponseEntity deleteTodo(@PathVariable int todoId) {
         toDoService.delete(todoId);
 
-        return "Deleted successfully";
+        return ResponseEntity.noContent().build();
     }
 
     @PutMapping("/todos")
-    public ToDo updateTodo(@RequestBody ToDo todo) {
+    public ResponseEntity<ToDo> updateTodo(@RequestBody ToDo todo) {
 
-        return toDoService.update(todo);
+        return ResponseEntity.ok(toDoService.update(todo));
     }
 }

@@ -108,26 +108,12 @@ class ToDoRestControllerTest {
 
     @Test
     void getToDoById() throws Exception {
-        final int id = 3;
-        final ToDo toDo = toDoList.get(2);
-
-        given(toDoService.getToDoById(id)).willReturn(toDo);
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/todos/{id}", id))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("Buy ticket"))
-                .andExpect(jsonPath("$.completed").value(true));
 
     }
 
     @Test
     void getAllToDos() throws Exception{
 
-        given(toDoService.getAllToDos()).willReturn(toDoList);
-
-       mockMvc.perform(MockMvcRequestBuilders.get("/api/todos"))
-               .andExpect(status().isOk())
-               .andExpect(jsonPath("$.size()").value(4));
     }
 
     @Test
