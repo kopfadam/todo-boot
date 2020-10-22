@@ -39,6 +39,14 @@ class UserRestControllerTest {
 
     @Test
     void getUserById() {
+        final int id = 1;
+
+        ResponseEntity<User> user = testRestTemplate.getForEntity("http://localhost:8080/api/users/" + id, User.class);
+
+        assertEquals(user.getStatusCode(), HttpStatus.OK);
+
+        // we populate h2 database in advance, check data.sql file for other names
+        assertEquals(user.getBody().getEmail(),"mark@mail.com");
     }
 
     @Test

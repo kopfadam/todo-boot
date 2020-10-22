@@ -1,9 +1,9 @@
 insert into USER (id, created, email, modified, name, password)
-values ('1', '2018-08-17 07:42:44.136', 'as@mail.com', '2018-08-17 07:42:44.136', 'Aslan','pass');
+values ('1', '2018-08-17 07:42:44.136', 'mark@mail.com', '2018-08-17 07:42:44.136', 'Mark','pass');
 insert into USER (id, created, email, modified, name, password)
-values ('2', '2019-08-18 07:42:44.136', 'asd@mail.com', '2019-08-18 07:42:44.136', 'Kaplan','pass');
+values ('2', '2019-08-18 07:42:44.136', 'fiona@mail.com', '2019-08-18 07:42:44.136', 'Fiona','pass');
 insert into USER (id, created, email, modified, name, password)
-values ('3', '2020-08-19 07:42:44.136', 'asdf@mail.com', '2020-08-19 07:42:44.136', 'Fil','pass');
+values ('3', '2020-08-19 07:42:44.136', 'ryan@mail.com', '2020-08-19 07:42:44.136', 'Ryan','pass');
 
 
 
