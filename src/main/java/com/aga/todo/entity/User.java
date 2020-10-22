@@ -33,6 +33,10 @@ public class User {
     public User() {
     }
 
+    public User(@NotBlank String email) {
+        this.email = email;
+    }
+
     public User(String name, String password, String email){
         this.name = name;
         this.password = password;
